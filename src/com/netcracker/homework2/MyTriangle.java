@@ -1,5 +1,7 @@
 package com.netcracker.homework2;
 
+import java.util.Objects;
+
 public class MyTriangle {
     private MyPoint v1;
     private MyPoint v2;
@@ -10,18 +12,22 @@ public class MyTriangle {
         this.v2 = new MyPoint(x2, y2);
         this.v3 = new MyPoint(x3, y3);
     }
+
     public MyTriangle(MyPoint v1, MyPoint v2, MyPoint v3){
         this.v1 = v1;
         this.v2 = v2;
         this.v3 = v3;
     }
+
     @Override
     public String toString(){
         return "MyTriangle[v1=" + v1.toString() + ", v2=" + v2.toString() + ", v3=" + v3.toString() + ")";
     }
+
     public double getPerimeter(){
         return v1.distance(v2)+v2.distance(v3)+v3.distance(v1);
     }
+
     public String getType(){
         double x = v1.distance(v2);
         double y = v2.distance(v3);
@@ -35,5 +41,20 @@ public class MyTriangle {
         }
         else type = "Scalene";
         return type;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MyTriangle)) return false;
+        MyTriangle that = (MyTriangle) o;
+        return Objects.equals(v1, that.v1) &&
+                Objects.equals(v2, that.v2) &&
+                Objects.equals(v3, that.v3);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(v1, v2, v3);
     }
 }

@@ -1,6 +1,7 @@
 package com.netcracker.homework2;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Book {
     private String name;
@@ -55,4 +56,26 @@ public class Book {
         return result;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Book)) { return false;}
+
+        Book book = (Book) o;
+
+        return (this.price == book.price)&&
+                book.name.equals(this.name)&&
+                Arrays.equals(authors, book.authors)&&
+                (book.qty == this.qty);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31 * result + this.name.hashCode();
+        result = 31 * result + Arrays.hashCode(this.authors);
+        result = 31 * result + (int)this.price;
+        result = 31 * result + this.qty;
+        return result;
+    }
 }
